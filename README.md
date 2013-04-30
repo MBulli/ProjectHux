@@ -1,7 +1,7 @@
-FHWSGame
+﻿Project Hux
 ========
 
-Das brandneue Spiel der FH Würzburg. Coming soon!
+Das brandneue Spiel. Coming soon!
 
 
 Hello World
