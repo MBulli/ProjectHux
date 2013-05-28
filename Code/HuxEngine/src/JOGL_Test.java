@@ -22,7 +22,7 @@ public class JOGL_Test extends GLCanvas implements GLEventListener {
    private static final int FPS = 60; // animator's target frames per second
  
    /** The entry main() method to setup the top-level container and animator */
-   public static void main(String[] args) {
+   public static void main() {
       // Run the GUI codes in the event-dispatching thread for thread safety
       SwingUtilities.invokeLater(new Runnable() {
          @Override
@@ -84,7 +84,7 @@ public class JOGL_Test extends GLCanvas implements GLEventListener {
       gl.glDepthFunc(GL_LEQUAL);  // the type of depth test to do
       gl.glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST); // best perspective correction
       gl.glShadeModel(GL_SMOOTH); // blends colors nicely, and smoothes out lighting
- 
+
       // ----- Your OpenGL initialization code here -----
    }
  
@@ -106,7 +106,7 @@ public class JOGL_Test extends GLCanvas implements GLEventListener {
       gl.glMatrixMode(GL_PROJECTION);  // choose projection matrix
       gl.glLoadIdentity();             // reset projection matrix
       glu.gluPerspective(45.0, aspect, 0.1, 100.0); // fovy, aspect, zNear, zFar
- 
+       
       // Enable the model-view transform
       gl.glMatrixMode(GL_MODELVIEW);
       gl.glLoadIdentity(); // reset
@@ -119,6 +119,7 @@ public class JOGL_Test extends GLCanvas implements GLEventListener {
    public void display(GLAutoDrawable drawable) {
       GL2 gl = drawable.getGL().getGL2();  // get the OpenGL 2 graphics context
       gl.glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear color and depth buffers
+      
       gl.glLoadIdentity();  // reset the model-view matrix
  
       // ----- Your OpenGL rendering code here (Render a white triangle for testing) -----
