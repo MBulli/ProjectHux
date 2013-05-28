@@ -2,7 +2,7 @@ import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
 import de.hux.graphics.*;
-import de.hux.graphics.internal.Color;
+import de.hux.graphics.primitives.Color;
 import de.hux.graphics.primitives.RotateTransform;
 import de.hux.graphics.primitives.ScaleTransform;
 import de.hux.graphics.primitives.Vector2D;

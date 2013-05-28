@@ -14,6 +14,8 @@ import static javax.media.opengl.GL2.*; // GL2 constants
 
 import de.hux.graphics.*;
 import de.hux.graphics.Shape;
+import de.hux.graphics.primitives.Color;
+import de.hux.graphics.primitives.Colorf;
 import de.hux.graphics.primitives.Vector2D;
 
 public class HuxGLCanvas extends GLCanvas implements GLEventListener, GraphicAdapter

@@ -1,6 +1,6 @@
 package de.hux.graphics;
 
-import de.hux.graphics.internal.Color;
+import de.hux.graphics.primitives.Color;
 import de.hux.graphics.primitives.Vector2D;
 
 public interface GraphicAdapter 

@@ -4,6 +4,7 @@ package de.hux.graphics.internal;
 import javax.media.opengl.GL2;
 
 import de.hux.graphics.*;
+import de.hux.graphics.primitives.Colorf;
 import de.hux.graphics.primitives.Vector2D;
 
 import static javax.media.opengl.GL.*;  // GL constants

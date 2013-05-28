@@ -1,4 +1,4 @@
-package de.hux.graphics.internal;
+package de.hux.graphics.primitives;
 
 public class Colorf
 {
