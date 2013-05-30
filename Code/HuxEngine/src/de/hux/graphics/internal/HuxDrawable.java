@@ -20,6 +20,8 @@ public abstract class HuxDrawable implements Drawable
 		if(isDirty)
 			transformGroup = new TransformGroup(new Transform[] { new TranslateTransform(position), this.rotate, this.scale });
 		
+		isDirty = false;
+		
 		return this.transformGroup;
 	}
 	
