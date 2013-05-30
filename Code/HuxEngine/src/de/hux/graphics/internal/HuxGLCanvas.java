@@ -25,10 +25,7 @@ public class HuxGLCanvas extends GLCanvas implements GLEventListener, GraphicAda
 	private GLU glu;
 	private int clientWidth;
 	private int clientHeight;
-	
-	private static int sizeX = 640;
-	private static int sizeY = 480;
-	
+		
 	private final ArrayList<HuxPrimitiveShape> worldList;
 	
 	public HuxGLCanvas(int width, int height)
@@ -114,13 +111,25 @@ public class HuxGLCanvas extends GLCanvas implements GLEventListener, GraphicAda
  		//        oder die Fenstergröße verwendet.
  		//		  Ersteres erzeugt ein virtuelles Koordinatensystem welches unabhänig der Auflösung ist
  		//		  Zweiteres erleaubt es Pixel genau bzw. 1:1 zu zeichen. Was ist nun sinnvoll? (Bulli)
- 		gl.glOrtho(0, sizeX, sizeY, 0, 0, 1.0f);
+ 		gl.glOrtho(0, clientWidth, clientHeight, 0, 0, 1.0f);
 	}
 	
 	@Override
 	public void reshape(GLAutoDrawable drawable, int x, int y, int width, int height) 
 	{
+		GL2 gl = drawable.getGL().getGL2();
 		
+		gl.glViewport(0, 0, width, height);
+		gl.glMatrixMode(GL_PROJECTION);
+		gl.glLoadIdentity();
+		
+		this.clientWidth = width;
+		this.clientHeight = height;
+		
+		gl.glOrtho(0, width, 0, height,  0, 1);
+
+		gl.glMatrixMode(GL_MODELVIEW);
+		gl.glLoadIdentity();
 	}
 	
 	@Override

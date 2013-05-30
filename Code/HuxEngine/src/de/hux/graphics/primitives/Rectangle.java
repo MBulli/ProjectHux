@@ -2,17 +2,17 @@ package de.hux.graphics.primitives;
 
 public class Rectangle
 {
-	public final int x;
-	public final int y;
-	public final int width;
-	public final int height;
+	public final float x;
+	public final float y;
+	public final float width;
+	public final float height;
 	
-	public final int left;
-	public final int top;
-	public final int right;
-	public final int bottom;
+	public final float left;
+	public final float top;
+	public final float right;
+	public final float bottom;
 	
-	public Rectangle(int x, int y, int width, int height)
+	public Rectangle(float x, float y, float width, float height)
 	{
 		this.x = x;
 		this.y = y;

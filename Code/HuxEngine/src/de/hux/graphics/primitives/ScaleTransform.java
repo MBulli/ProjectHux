@@ -4,8 +4,8 @@ import javax.media.opengl.GL2;
 
 public class ScaleTransform extends Transform
 {
-	public final int scaleX;
-	public final int scaleY;
+	public final float scaleX;
+	public final float scaleY;
 	
 	public ScaleTransform()
 	{
@@ -13,10 +13,16 @@ public class ScaleTransform extends Transform
 		this.scaleY = 1;
 	}
 	
-	public ScaleTransform(int sX, int sY)
+	public ScaleTransform(float sX, float sY)
 	{
 		this.scaleX = sX;
 		this.scaleY = sY;
+	}
+	
+	public ScaleTransform(Vector2D v)
+	{
+		this.scaleX = v.x;
+		this.scaleY = v.y;
 	}
 	
 	@Override

@@ -4,7 +4,7 @@ import javax.media.opengl.GL2;
 
 public class RotateTransform extends Transform
 {
-	public final int angle;
+	public final float angle;
 	public final Vector2D center;
 	
 	public RotateTransform()
@@ -13,12 +13,12 @@ public class RotateTransform extends Transform
 		this.center = new Vector2D();
 	}
 	
-	public RotateTransform(int angle, int centerX, int centerY)
+	public RotateTransform(float angle, float centerX, float centerY)
 	{
 		this(angle, new Vector2D(centerX, centerY));
 	}
 	
-	public RotateTransform(int angle, Vector2D center)
+	public RotateTransform(float angle, Vector2D center)
 	{
 		this.angle = angle;
 		this.center = center;

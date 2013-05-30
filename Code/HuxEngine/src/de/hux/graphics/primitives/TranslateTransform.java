@@ -4,8 +4,8 @@ import javax.media.opengl.GL2;
 
 public class TranslateTransform extends Transform
 {
-	public final int dX;
-	public final int dY;
+	public final float dX;
+	public final float dY;
 	
 	public TranslateTransform()
 	{
@@ -17,7 +17,7 @@ public class TranslateTransform extends Transform
 		this(v.x, v.y);
 	}
 	
-	public TranslateTransform(int dx, int dy)
+	public TranslateTransform(float dx, float dy)
 	{
 		this.dX = dx;
 		this.dY = dy;
