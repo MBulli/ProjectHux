@@ -26,7 +26,7 @@ public class HuxGLCanvas extends GLCanvas implements GLEventListener, GraphicAda
 	private int clientWidth;
 	private int clientHeight;
 		
-	private final ArrayList<HuxPrimitiveShape> worldList;
+	private final ArrayList<HuxDrawable> worldList;
 	
 	public HuxGLCanvas(int width, int height)
 	{
@@ -37,12 +37,12 @@ public class HuxGLCanvas extends GLCanvas implements GLEventListener, GraphicAda
 		
 		this.setPreferredSize(new Dimension(width, height));
 		
-		this.worldList = new ArrayList<HuxPrimitiveShape>();
+		this.worldList = new ArrayList<HuxDrawable>();
 	}
 	
 	public HuxGLCanvas(boolean fullscreen)
 	{
-		this.worldList = new ArrayList<HuxPrimitiveShape>();
+		this.worldList = new ArrayList<HuxDrawable>();
 	}
 	
 	@Override
@@ -54,7 +54,7 @@ public class HuxGLCanvas extends GLCanvas implements GLEventListener, GraphicAda
 	@Override
 	public void addDrawableToWorld(Drawable drawable)
 	{
-		this.worldList.add((HuxPrimitiveShape)drawable);
+		this.worldList.add((HuxDrawable)drawable);
 	}
 	
 	@Override
@@ -94,11 +94,17 @@ public class HuxGLCanvas extends GLCanvas implements GLEventListener, GraphicAda
 	    
 		// Wir benutzten den Tiefentest um unsere 2D Objekte an der Z Ache zu sortieren,
 		// so müssen wir nicht per Hand unsere Ebenen in der richtigen Reinfolge zeichnen
-	    gl.glEnable(GL_DEPTH_TEST);
+		//gl.glEnable(GL_DEPTH_TEST);
+		
 	    gl.glDepthFunc(GL_LESS);
 	    
 	    gl.glEnable(GL_TEXTURE_2D);
 	    
+	    //Alpha und Blending
+		gl.glAlphaFunc(gl.GL_NEAREST, 0.1f);
+		gl.glEnable(gl.GL_BLEND);
+		gl.glBlendFunc(gl.GL_ONE, gl.GL_ONE_MINUS_SRC_ALPHA);
+		
 	    // "Kamera" konfigurieren
  		gl.glClearDepth(GL_DEPTH_BUFFER_BIT);
  		gl.glMatrixMode(GL_PROJECTION);
