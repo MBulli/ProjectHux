@@ -1,5 +1,6 @@
 package de.hux.graphics;
 
+import de.hux.graphics.internal.TextureManager;
 import de.hux.graphics.primitives.Color;
 import de.hux.graphics.primitives.Vector2D;
 
@@ -11,7 +12,12 @@ public interface GraphicAdapter
 	Shape createTriangleShape(Vector2D pt1, Vector2D pt2, Vector2D pt3, Color color);
 	Shape createTriangleShape(Vector2D pt1, Vector2D pt2, Vector2D pt3, Color color1, Color color2, Color color3);
 	
+	 Sprite createSprite(String texname, float x, float y, float width, float height);
+	
 	void addDrawableToWorld(Drawable drawable);
 	
 	void Draw();
+	
+	AnimationManager getAnimationManger();
+	TextureManager getTextureManager();
 }

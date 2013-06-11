@@ -28,7 +28,7 @@ public class RotateTransform extends Transform
 	public void Apply(GL2 gl)
 	{
 		// TODO: Center
-		//gl.glTranslatef(center.x, center.y, 0.0f);
+		//gl.glTranslatef(center.x, center.y, 1.0f);
 		gl.glRotatef(angle, 0.0f, 0.0f, 1.0f);
 		
 	}

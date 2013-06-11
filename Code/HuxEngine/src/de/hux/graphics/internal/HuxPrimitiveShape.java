@@ -5,6 +5,7 @@ import javax.media.opengl.GL2;
 
 import de.hux.graphics.*;
 import de.hux.graphics.primitives.Colorf;
+import de.hux.graphics.primitives.RotateTransform;
 import de.hux.graphics.primitives.Vector2D;
 
 import static javax.media.opengl.GL.*;  // GL constants
@@ -16,8 +17,10 @@ public class HuxPrimitiveShape extends HuxDrawable implements Shape
 	private Vector2D[] vertices;
 	private Colorf[] colors;
 	
-	public HuxPrimitiveShape(int type, Vector2D[] vertices, Colorf[] colors)
+	public HuxPrimitiveShape(HuxGLCanvas canvas, int type, Vector2D[] vertices, Colorf[] colors)
 	{
+		super(canvas);
+		
 		// TODO: type really required?
 		// 0 = Triangle, 1 = Rectangle
 		this.type = type;
@@ -27,7 +30,7 @@ public class HuxPrimitiveShape extends HuxDrawable implements Shape
 	}
 	
 	@Override
-	public void Render(GL2 gl)
+	public void RenderInternal(GL2 gl)
 	{			
 		gl.glBegin(GL_TRIANGLE_FAN);
 		
@@ -38,6 +41,12 @@ public class HuxPrimitiveShape extends HuxDrawable implements Shape
 			}
 				
 		gl.glEnd();
+	}
+	
+	@Override
+	protected void UpdateInternal()
+	{
+		
 	}
 	
 	@Override
@@ -55,6 +64,6 @@ public class HuxPrimitiveShape extends HuxDrawable implements Shape
 	@Override
 	public Shape Clone()
 	{
-		return new HuxPrimitiveShape(this.type, this.vertices, this.colors);
+		return new HuxPrimitiveShape(glCanvas, this.type, this.vertices, this.colors);
 	}
 }

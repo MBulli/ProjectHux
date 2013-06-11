@@ -3,6 +3,7 @@ import java.awt.Frame;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
+import de.hux.graphics.*;
 import de.hux.graphics.GraphicAdapter;
 import de.hux.graphics.GraphicAdapterFactory;
 import de.hux.graphics.Shape;
@@ -33,34 +34,29 @@ public class BulliTest
 		
 			
 				
-				Shape triangle = adapter.createTriangleShape(new Vector2D(0, 100), 
+				final Shape triangle = adapter.createTriangleShape(new Vector2D(0, 100), 
 															 new Vector2D(50, 0),
 															 new Vector2D(100, 100),
 															 Color.redColor,
 															 Color.greenColor,
 															 Color.blueColor);
 				
+
 				Vector2D[] vRect = new Vector2D[] { new Vector2D(0, 0),
 													new Vector2D(100, 0),
 													new Vector2D(100, 100),
 													new Vector2D(0, 100) };
 
-				Vector2D[] groﬂ = new Vector2D[] {new Vector2D(0, 0),
-													new Vector2D(0, 200),
-													new Vector2D(200, 200),
-													new Vector2D(200, 0) };
-				
-				Vector2D[] mittel = new Vector2D[] {new Vector2D(0, 0),
-						new Vector2D(0,100),
-						new Vector2D(100, 100),
-						new Vector2D(100, 0) };
-				
-				Vector2D[] klein = new Vector2D[] {new Vector2D(0, 0),
-						new Vector2D(0, 70),
-						new Vector2D(70, 70),
-						new Vector2D(70, 0) };
-				
-				
+				adapter.getAnimationManger().CreateAnimation(new AnimationDescriptor(0, 5, new AnimationContext()
+				{
+					@Override
+					public void UpdateAnimation()
+					{
+						triangle.setPosition(new Vector2D(200, 200));
+						triangle.setRotation(new RotateTransform(180, null));
+					}
+				}));
+												
 				
 				Shape rect = adapter.createRectangle(vRect, Color.greenColor);
 				Shape rect2 = adapter.createRectangle(vRect, Color.redColor);
@@ -85,25 +81,15 @@ public class BulliTest
 				adapter.addDrawableToWorld(rect);
 				adapter.addDrawableToWorld(rect3);
 			    adapter.addDrawableToWorld(rect4);
-				
-				
-				TextureManager tm = TextureManager.getInstance();
-				tm.createTexture("awesome.png", ".png", "awesome");
-				// Test Sprites
-				HuxSprite p = new HuxSprite(groﬂ);
-				p.setPosition(new Vector2D(100,100));
-				p.attachTexture("awesome");
-				
-				HuxSprite p1 = new HuxSprite(mittel);
-				p1.setPosition(new Vector2D(250,100));
+
+
+				Sprite p = adapter.createSprite("awesome", 100, 100, 200, 200);
+				Sprite p1 = adapter.createSprite("awesome", 250, 100, 100, 100);
+				Sprite p2 = adapter.createSprite("awesome", 450, 300, 70, 70);
+
 				p1.setTransparency(0.5f);
-				p1.attachTexture("awesome");
-				
-				HuxSprite p2 = new HuxSprite(klein);
-				p2.setPosition(new Vector2D(450, 300));
 				p2.setTransparency(0.1f);
 				p2.setRotation(new RotateTransform(90,null));
-				p2.attachTexture("awesome");
 				
 				//Add Sprites to renderloop
 				

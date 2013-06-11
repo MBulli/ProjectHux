@@ -3,6 +3,7 @@ package de.hux.graphics.internal;
 import java.awt.*;
 import java.util.ArrayList;
 
+import javax.media.opengl.GL;
 import javax.media.opengl.GL2;
 import javax.media.opengl.GLAutoDrawable;
 import javax.media.opengl.GLEventListener;
@@ -25,6 +26,9 @@ public class HuxGLCanvas extends GLCanvas implements GLEventListener, GraphicAda
 	private GLU glu;
 	private int clientWidth;
 	private int clientHeight;
+	
+	private final AnimationManager animationManager = new HuxAnimationManager();
+	private final TextureManager textureManger = new TextureManager();
 		
 	private final ArrayList<HuxDrawable> worldList;
 	
@@ -66,21 +70,41 @@ public class HuxGLCanvas extends GLCanvas implements GLEventListener, GraphicAda
 	@Override
 	public Shape createTriangleShape(Vector2D pt1, Vector2D pt2, Vector2D pt3, Color color1, Color color2, Color color3)
 	{
-		return new HuxPrimitiveShape(0, new Vector2D[] { pt1, pt2, pt3 }, new Colorf[] { color1.toColorf(),  color2.toColorf(), color3.toColorf() });
+		return new HuxPrimitiveShape(this, 0, new Vector2D[] { pt1, pt2, pt3 }, new Colorf[] { color1.toColorf(),  color2.toColorf(), color3.toColorf() });
 	}
 	
 	@Override
 	public Shape createRectangle(Vector2D[] points, Color color)
 	{
 		Colorf c = color.toColorf();
-		return new HuxPrimitiveShape(1, points, new Colorf[] { c, c, c, c });
+		return new HuxPrimitiveShape(this, 1, points, new Colorf[] { c, c, c, c });
 	}
 	
 	@Override
 	public Shape createRectangle(Vector2D pt1, Vector2D pt2, Vector2D pt3, Vector2D pt4, Color color)
 	{
 		Colorf c = color.toColorf();
-		return new HuxPrimitiveShape(1, new Vector2D[] { pt1, pt2, pt3, pt4 }, new Colorf[] { c, c, c, c });
+		return new HuxPrimitiveShape(this, 1, new Vector2D[] { pt1, pt2, pt3, pt4 }, new Colorf[] { c, c, c, c });
+	}
+	
+	@Override
+	public Sprite createSprite(String texname, float x, float y, float width,
+			float height)
+	{
+		// TODO @Alex Dateiendung aus texname nehmen
+		textureManger.createTexture(texname + ".png", ".png", texname);
+		// Test Sprites
+		
+		Vector2D[] v = { new Vector2D(0, 0),
+						 new Vector2D(0, height),
+						 new Vector2D(width, height),
+						 new Vector2D(width, 0) };
+		
+		HuxSprite p = new HuxSprite(this, v);
+		p.setPosition(new Vector2D(x, y));
+		p.attachTexture(texname);
+		
+		return  p;
 	}
 	
 	
@@ -101,9 +125,9 @@ public class HuxGLCanvas extends GLCanvas implements GLEventListener, GraphicAda
 	    gl.glEnable(GL_TEXTURE_2D);
 	    
 	    //Alpha und Blending
-		gl.glAlphaFunc(gl.GL_NEAREST, 0.1f);
-		gl.glEnable(gl.GL_BLEND);
-		gl.glBlendFunc(gl.GL_ONE, gl.GL_ONE_MINUS_SRC_ALPHA);
+		gl.glAlphaFunc(GL.GL_NEAREST, 0.1f);
+		gl.glEnable(GL.GL_BLEND);
+		gl.glBlendFunc(GL.GL_ONE, GL.GL_ONE_MINUS_SRC_ALPHA);
 		
 	    // "Kamera" konfigurieren
  		gl.glClearDepth(GL_DEPTH_BUFFER_BIT);
@@ -153,6 +177,8 @@ public class HuxGLCanvas extends GLCanvas implements GLEventListener, GraphicAda
 		{
 			gl.glPushMatrix();
 			
+			item.Update();
+			
 			item.getTransform().Apply(gl);
 			item.Render(gl);
 			
@@ -165,5 +191,15 @@ public class HuxGLCanvas extends GLCanvas implements GLEventListener, GraphicAda
 	public void dispose(GLAutoDrawable arg0)
 	{
 		this.removeGLEventListener(this);
+	}
+	
+	public AnimationManager getAnimationManger()
+	{
+		return animationManager;
+	}
+	
+	public TextureManager getTextureManager()
+	{
+		return textureManger;
 	}
 }

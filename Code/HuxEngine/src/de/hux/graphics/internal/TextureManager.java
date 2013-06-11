@@ -8,10 +8,9 @@ import javax.media.opengl.GLContext;
 
 import com.jogamp.opengl.util.texture.Texture;
 
-public class TextureManager {
-
-	private static TextureManager instance  = new TextureManager();
-	private static  GL2 gl;
+public class TextureManager 
+{
+	private static GL2 gl;
 	
 	//Hashmap 
 	private static HashMap<String,HuxTexture> Textures = new HashMap<String,HuxTexture>();
@@ -19,17 +18,9 @@ public class TextureManager {
 
 	public TextureManager()
 	{
-		if (instance == null)
-		{
-			instance = this;
-		}
+		
 	}
-	
-	public static TextureManager getInstance()
-	{
-		return instance;
-	}
-	
+		
 	public  void createTexture(String filename, String type, String name)
 	{
 		HuxTexture texture = new HuxTexture();
