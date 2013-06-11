@@ -3,7 +3,7 @@
 *.ear
 
 
-bin/**
+# bin/**
 tmp/**
 tmp/**/*
 *.tmp
